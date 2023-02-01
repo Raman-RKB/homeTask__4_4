@@ -1,12 +1,15 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-undef */
 //debugger;
 class Game {
     constructor(parent, cardSet) {
         this.parent = parent
-        this.level = level
+
         this.cardSet = cardSet
 
         this.setPairCard = []
         this.setArr = []
+        // eslint-disable-next-line no-undef
         this.element = templateEngine(Game.startPlayTemplate())
         parent.appendChild(this.element)
 
@@ -88,9 +91,8 @@ class Game {
     }
 
     onCheckMatch() {
-        if (this.setPairCard[0].id === this.setPairCard[1].id) {
-        } else {
-            const losePopup = new Popup(
+        if (this.setPairCard[0].id !== this.setPairCard[1].id) {
+        new Popup(
                 this.parent,
                 'lose',
                 `${this.timerMinutes.textContent}.${this.timerSeconds.textContent}`
@@ -116,7 +118,7 @@ class Game {
             this.setPairCard.push(target)
             this.onCheckMatch()
         } else {
-            const winPopup = new Popup(
+            new Popup(
                 this.parent,
                 'win',
                 `${this.timerMinutes.textContent}.${this.timerSeconds.textContent}`

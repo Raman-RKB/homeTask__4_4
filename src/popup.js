@@ -1,9 +1,11 @@
+/* eslint-disable no-undef */
 class Popup {
     constructor(body, result, stopwatch) {
         this.parent = body
         this.result = result
         this.stopwatch = stopwatch
 
+        // eslint-disable-next-line no-undef
         this.popupBackground = templateEngine(Popup.PopupBackgroundTemplate())
         this.parent.appendChild(this.popupBackground)
 
@@ -22,7 +24,7 @@ class Popup {
 
     onRestartGameClick() {
         this.parent.replaceChildren()
-        level = new Level(document.querySelector('.body'))
+        new Level(document.querySelector('.body'))
     }
 
     renderPopup() {

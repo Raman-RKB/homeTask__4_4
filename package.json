@@ -5,7 +5,11 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "format": "prettier --write ./src/"
+        "format": "prettier --write ./src/",
+        "lint:js": "eslint ./src/**/*.js",
+        "lint:css": "stylelint ./src/**/*.css",
+        "prepare": "husky install",
+        "lint": "npm run lint:js && npm run lint:css"
     },
     "keywords": [],
     "author": "",
@@ -15,6 +19,14 @@
         "timezz": "^7.0.0"
     },
     "devDependencies": {
-        "prettier": "^2.8.3"
+        "eslint": "^8.33.0",
+        "eslint-config-prettier": "^8.6.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "husky": "^8.0.3",
+        "prettier": "^2.8.3",
+        "stylelint": "^14.16.1",
+        "stylelint-config-prettier": "^9.0.4",
+        "stylelint-config-standard": "^29.0.0",
+        "stylelint-prettier": "^2.0.0"
     }
 }

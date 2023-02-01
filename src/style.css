@@ -1,5 +1,8 @@
+/* stylelint-disable function-url-quotes */
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
 @font-face {
-    font-family: 'Statosskyeng';
+    font-family: Statosskyeng;
     src: url('../src/font/statosskyeng-v1.001/Web fonts/stratosskyengweb-regular.woff')
         format('woff');
     src: local(),
@@ -22,7 +25,7 @@
 .body {
     height: 100vh;
     min-height: 100vh;
-    font-family: 'Statosskyeng';
+    font-family: Statosskyeng;
 }
 
 .body {
@@ -71,7 +74,7 @@
 .complexity__container_item {
     width: 98px;
     height: 98px;
-    background: #ffffff;
+    background: #fff;
     border-radius: 12px;
     font-style: normal;
     font-weight: 400;
@@ -96,7 +99,7 @@
     width: 246px;
     height: 48px;
     margin-bottom: 50px;
-    font-family: 'Statosskyeng';
+    font-family: Statosskyeng;
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
@@ -104,7 +107,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    color: #ffffff;
+    color: #fff;
     background: #7ac100;
     border: 0;
     border-radius: 12px;
@@ -157,7 +160,7 @@
     font-weight: 400;
     font-size: 64px;
     line-height: 72px;
-    color: #ffffff;
+    color: #fff;
 }
 
 .game__header_min-pointer {
@@ -171,7 +174,7 @@
     font-size: 16px;
     line-height: 32px;
     font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #ffffff;
+    color: #fff;
 }
 
 .game__header_min-display-adapting-if-12-cards {
@@ -189,7 +192,7 @@
     font-size: 16px;
     line-height: 32px;
     font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #ffffff;
+    color: #fff;
 }
 
 .game__header_sec-display-adapting-if-12-cards {
@@ -202,7 +205,7 @@
     background: #7ac100;
     border: 0;
     border-radius: 12px;
-    font-family: 'Statosskyeng';
+    font-family: Statosskyeng;
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
@@ -217,7 +220,7 @@
 .game__container_item {
     width: 95px;
     height: 133px;
-    background: #ffffff;
+    background: #fff;
     border-radius: 4px;
 }
 
@@ -413,7 +416,7 @@
     font-size: 24px;
     line-height: 32px;
     font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #000000;
+    color: #000;
 }
 
 .win__popup_stopwath-display {
@@ -423,7 +426,7 @@
     font-weight: 400;
     font-size: 64px;
     line-height: 72px;
-    color: #000000;
+    color: #000;
 }
 
 .win__popup_play-again-button {
@@ -431,7 +434,7 @@
     height: 50px;
     margin-top: 32px;
     margin-bottom: 50px;
-    font-family: 'Statosskyeng';
+    font-family: Statosskyeng;
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
@@ -439,7 +442,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    color: #ffffff;
+    color: #fff;
     background: #7ac100;
     border: 0;
     border-radius: 12px;
@@ -489,7 +492,7 @@
     font-size: 24px;
     line-height: 32px;
     font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #000000;
+    color: #000;
 }
 
 .lose__popup_stopwath-display {
@@ -499,7 +502,7 @@
     font-weight: 400;
     font-size: 64px;
     line-height: 72px;
-    color: #000000;
+    color: #000;
 }
 
 .lose__popup_play-again-button {
@@ -507,7 +510,7 @@
     height: 50px;
     margin-top: 32px;
     margin-bottom: 50px;
-    font-family: 'Statosskyeng';
+    font-family: Statosskyeng;
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
@@ -515,7 +518,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    color: #ffffff;
+    color: #fff;
     background: #7ac100;
     border: 0;
     border-radius: 12px;

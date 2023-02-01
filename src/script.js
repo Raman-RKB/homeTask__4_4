@@ -1,6 +1,7 @@
 class Level {
     constructor(parent) {
         this.parent = parent
+        // eslint-disable-next-line no-undef
         this.element = templateEngine(Level.complexityTemplate())
         parent.appendChild(this.element)
         this.level = [0]
@@ -83,9 +84,10 @@ class Level {
                 cardSet.push(cardId, cardId)
             }
         }
-        const play = new Game(
+        // eslint-disable-next-line no-undef
+        new Game(
             this.parent,
-            cardSet.sort((a, b) => 0.5 - Math.random())
+            cardSet.sort(() => 0.5 - Math.random())
         )
     }
 }
