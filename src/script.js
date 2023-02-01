@@ -1,42 +1,60 @@
 class Level {
     constructor(parent) {
-        this.parent = parent;
-        this.element = templateEngine(Level.complexityTemplate());
-        parent.appendChild(this.element);
-        this.level = [0];
+        this.parent = parent
+        this.element = templateEngine(Level.complexityTemplate())
+        parent.appendChild(this.element)
+        this.level = [0]
 
-        this.startButton = this.element.querySelector(".complexity__start-button");
-        this.complexityСontainer = this.element.querySelector(".complexity__container");
+        this.startButton = this.element.querySelector(
+            '.complexity__start-button'
+        )
+        this.complexityСontainer = this.element.querySelector(
+            '.complexity__container'
+        )
 
-
-        this.onGenerateCardSet.bind(this);
-        this.onStartPlay.bind(this);
-        this.startButton.addEventListener("click", this.onStartPlay.bind(this));
-        this.complexityСontainer.addEventListener("click", this.onComplexityClick.bind(this));
-
+        this.onGenerateCardSet.bind(this)
+        this.onStartPlay.bind(this)
+        this.startButton.addEventListener('click', this.onStartPlay.bind(this))
+        this.complexityСontainer.addEventListener(
+            'click',
+            this.onComplexityClick.bind(this)
+        )
     }
 
     onComplexityClick(event) {
-        const target = event.target;
-        if (target.classList.contains('level-1') || target.classList.contains('level-2') || target.classList.contains('level-3')) {
-            target.classList.add("complexity__container_item-hover");
+        const target = event.target
+        if (
+            target.classList.contains('level-1') ||
+            target.classList.contains('level-2') ||
+            target.classList.contains('level-3')
+        ) {
+            target.classList.add('complexity__container_item-hover')
         }
 
         if (target.classList.contains('level-1')) {
-            target.parentElement.nextSibling.firstChild.classList.remove('complexity__container_item-hover');
-            this.complexityСontainer.lastChild.classList.remove('complexity__container_item-hover');
-            this.level.splice(0, 1, 3);
-
+            target.parentElement.nextSibling.firstChild.classList.remove(
+                'complexity__container_item-hover'
+            )
+            this.complexityСontainer.lastChild.classList.remove(
+                'complexity__container_item-hover'
+            )
+            this.level.splice(0, 1, 3)
         } else if (target.classList.contains('level-2')) {
-            target.parentElement.previousSibling.firstChild.classList.remove('complexity__container_item-hover');
-            target.parentElement.nextSibling.firstChild.classList.remove('complexity__container_item-hover');
-            this.level.splice(0, 1, 6);
-
+            target.parentElement.previousSibling.firstChild.classList.remove(
+                'complexity__container_item-hover'
+            )
+            target.parentElement.nextSibling.firstChild.classList.remove(
+                'complexity__container_item-hover'
+            )
+            this.level.splice(0, 1, 6)
         } else if (target.classList.contains('level-3')) {
-            target.parentElement.previousSibling.firstChild.classList.remove('complexity__container_item-hover');
-            this.complexityСontainer.firstChild.classList.remove('complexity__container_item-hover');
-            this.level.splice(0, 1, 9);
-
+            target.parentElement.previousSibling.firstChild.classList.remove(
+                'complexity__container_item-hover'
+            )
+            this.complexityСontainer.firstChild.classList.remove(
+                'complexity__container_item-hover'
+            )
+            this.level.splice(0, 1, 9)
         }
     }
 
@@ -44,28 +62,31 @@ class Level {
         if (this.level[0] === 0) {
             return
         }
-        this.element.remove();
-        this.onGenerateCardSet(this.level[0]);
+        this.element.remove()
+        this.onGenerateCardSet(this.level[0])
     }
 
     onGenerateCardSet(lvl) {
-        const cardSet = [];
+        const cardSet = []
 
-        for (let i = 0; (lvl * 2) > cardSet.length; i++) {
-            const cardId = Math.floor(Math.random() * (37 - 1)) + 1;
+        for (let i = 0; lvl * 2 > cardSet.length; i++) {
+            const cardId = Math.floor(Math.random() * (37 - 1)) + 1
 
             if (cardSet.length > 0) {
                 const callback = (generatedNumber) => {
-                    return generatedNumber === cardId;
+                    return generatedNumber === cardId
                 }
                 if (cardSet.find(callback) === undefined) {
-                    cardSet.push(cardId, cardId);
+                    cardSet.push(cardId, cardId)
                 }
             } else {
-                cardSet.push(cardId, cardId);
+                cardSet.push(cardId, cardId)
             }
         }
-        const play = new Game(this.parent, cardSet.sort((a, b) => 0.5 - Math.random()));
+        const play = new Game(
+            this.parent,
+            cardSet.sort((a, b) => 0.5 - Math.random())
+        )
     }
 }
 
@@ -85,8 +106,7 @@ Level.complexityTemplate = () => ({
                 {
                     tag: 'div',
                     cls: ['complexity__container_item-shell', 'level-1'],
-                    content:
-                    {
+                    content: {
                         tag: 'div',
                         cls: ['complexity__container_item', 'level-1'],
                         content: '1',
@@ -96,8 +116,7 @@ Level.complexityTemplate = () => ({
                 {
                     tag: 'div',
                     cls: ['complexity__container_item-shell', 'level-2'],
-                    content:
-                    {
+                    content: {
                         tag: 'div',
                         cls: ['complexity__container_item', 'level-2'],
                         content: '2',
@@ -106,8 +125,7 @@ Level.complexityTemplate = () => ({
                 {
                     tag: 'div',
                     cls: ['complexity__container_item-shell', 'level-3'],
-                    content:
-                    {
+                    content: {
                         tag: 'div',
                         cls: ['complexity__container_item', 'level-3'],
                         content: '3',
@@ -120,8 +138,5 @@ Level.complexityTemplate = () => ({
             cls: 'complexity__start-button',
             content: 'Старт',
         },
-
-
-
     ],
-});
+})
