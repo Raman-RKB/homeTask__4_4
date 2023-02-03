@@ -2,7 +2,17 @@
 /* eslint-disable no-undef */
 //debugger;
 class Game {
-    constructor(parent, cardSet) {
+    parent: { appendChild: (arg0: any) => void }
+    cardSet: number[]
+    setPairCard: never[]
+    setArr: never[]
+    element: any
+    timerMinutes: any
+    timerSeconds: any
+    gameHeaderRestartButton: any
+    cardSetItem: any
+    timer: any
+    constructor(parent: { appendChild: (arg0: any) => void }, cardSet: number[]) {
         this.parent = parent
 
         this.cardSet = cardSet
@@ -34,9 +44,12 @@ class Game {
             this.onRestartGameClick.bind(this)
         )
     }
+    static startPlayTemplate(): any {
+        throw new Error("Method not implemented.")
+    }
 
     onRenderGameInterface() {
-        this.cardSet.forEach((el) => {
+        this.cardSet.forEach((el: any) => {
             this.cardSetItem = templateEngine(Game.cardSetItemTemplate(el))
             this.element.appendChild(this.cardSetItem)
         })
@@ -84,10 +97,13 @@ class Game {
         }
         setTimeout(this.onHideCards.bind(this), 5000)
     }
+    static cardSetItemTemplate(el: any): any {
+        throw new Error("Method not implemented.")
+    }
 
     onRestartGameClick() {
         this.element.remove()
-        level = new Level(document.querySelector('.body'))
+        new Level(document.querySelector('.body'))
     }
 
     onCheckMatch() {
@@ -103,7 +119,7 @@ class Game {
         this.setPairCard = []
     }
 
-    onShowCards(event) {
+    onShowCards(event: { target: any }) {
         const target = event.target
         target.style.backgroundImage = null
 
@@ -152,7 +168,7 @@ class Game {
     }
 }
 
-Game.cardSetItemTemplate = (el) => ({
+Game.cardSetItemTemplate = (el: any) => ({
     tag: 'div',
     cls: ['game__container_item', `game__container_item-${el}`],
     attrs: {

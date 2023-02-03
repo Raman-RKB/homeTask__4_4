@@ -1,5 +1,10 @@
 class Level {
-    constructor(parent) {
+    parent: { appendChild: (arg0: any) => void }
+    element: any
+    level: number[]
+    startButton: any
+    complexityСontainer: any
+    constructor(parent: { appendChild: (arg0: any) => void }) {
         this.parent = parent
 
         // eslint-disable-next-line no-undef
@@ -23,8 +28,11 @@ class Level {
             this.onComplexityClick.bind(this)
         )
     }
+    static complexityTemplate(): any {
+        throw new Error("Method not implemented.")
+    }
 
-    onComplexityClick(event) {
+    onComplexityClick(event: { target: any }) {
         const target = event.target
         if (
             target.classList.contains('level-1') ||
@@ -69,14 +77,14 @@ class Level {
         this.onGenerateCardSet(this.level[0])
     }
 
-    onGenerateCardSet(lvl) {
+    onGenerateCardSet(lvl: number) {
         const cardSet = []
 
         for (let i = 0; lvl * 2 > cardSet.length; i++) {
             const cardId = Math.floor(Math.random() * (37 - 1)) + 1
 
             if (cardSet.length > 0) {
-                const callback = (generatedNumber) => {
+                const callback = (generatedNumber: number) => {
                     return generatedNumber === cardId
                 }
                 if (cardSet.find(callback) === undefined) {

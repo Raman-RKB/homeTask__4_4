@@ -1,6 +1,9 @@
 /* eslint-disable no-undef */
 class Popup {
-    constructor(body, result, stopwatch) {
+    static PopupTemplate: (resultTag: any, resultText: any, passedTime: any) => { tag: string; cls: string; content: ({ tag: string; cls: string; attrs: { src: string }; content?: undefined } | { tag: string; cls: string; content: any; attrs?: undefined } | { tag: string; cls: string[]; content: string; attrs?: undefined })[] }
+    static PopupBackgroundTemplate: () => { tag: string; cls: string; };
+    [x: string]: any
+    constructor(body: { appendChild: (arg0: any) => void }, result: string, stopwatch: string) {
         this.parent = body
         this.result = result
         this.stopwatch = stopwatch
@@ -51,7 +54,7 @@ Popup.PopupBackgroundTemplate = () => ({
     cls: 'result-background',
 })
 
-Popup.PopupTemplate = (resultTag, resultText, passedTime) => ({
+Popup.PopupTemplate = (resultTag: any, resultText: any, passedTime: any) => ({
     tag: 'div',
     cls: `${resultTag}`,
     content: [
