@@ -1,20 +1,7 @@
 class Level {
-    static complexityTemplate: any;
-    [x: string]: {
-        querySelector(arg0: string): { appendChild: (arg0: any) => void; };
-        addEventListener(arg0: string, arg1: () => void): unknown;
-        lastChild: any;
-        splice(arg0: number, arg1: number, arg2: number): unknown;
-        firstChild: any;
-        remove(): unknown; appendChild: (arg0: any) => void; 
-};
-    constructor(parent: { appendChild: (arg0: any) => void; }) {
+    constructor(parent) {
+        this.parent = parent
 
-        this.parent = parent as { querySelector(arg0: string): { appendChild: (arg0: any) => void; }; 
-        addEventListener(arg0: string, arg1: () => void): unknown; lastChild: any; 
-        splice(arg0: number, arg1: number, arg2: number): unknown; firstChild: any; 
-        remove(): unknown; appendChild: (arg0: any) => void; };
-    
         // eslint-disable-next-line no-undef
         this.element = templateEngine(Level.complexityTemplate())
         parent.appendChild(this.element)
@@ -22,17 +9,11 @@ class Level {
 
         this.startButton = this.element.querySelector(
             '.complexity__start-button'
-        ) as { querySelector(arg0: string): { appendChild: (arg0: any) => void; }; 
-        addEventListener(arg0: string, arg1: () => void): unknown; lastChild: any; 
-        splice(arg0: number, arg1: number, arg2: number): unknown; firstChild: any; 
-        remove(): unknown; appendChild: (arg0: any) => void; }
+        )
 
         this.complexityСontainer = this.element.querySelector(
             '.complexity__container'
-        ) as { querySelector(arg0: string): { appendChild: (arg0: any) => void; }; 
-        addEventListener(arg0: string, arg1: () => void): unknown; lastChild: any; 
-        splice(arg0: number, arg1: number, arg2: number): unknown; firstChild: any; 
-        remove(): unknown; appendChild: (arg0: any) => void; }
+        )
 
         this.onGenerateCardSet.bind(this)
         this.onStartPlay.bind(this)
@@ -43,7 +24,7 @@ class Level {
         )
     }
 
-    onComplexityClick(event: { target: any; }) {
+    onComplexityClick(event) {
         const target = event.target
         if (
             target.classList.contains('level-1') ||
@@ -88,14 +69,14 @@ class Level {
         this.onGenerateCardSet(this.level[0])
     }
 
-    onGenerateCardSet(lvl: number) {
+    onGenerateCardSet(lvl) {
         const cardSet = []
 
         for (let i = 0; lvl * 2 > cardSet.length; i++) {
             const cardId = Math.floor(Math.random() * (37 - 1)) + 1
 
             if (cardSet.length > 0) {
-                const callback = (generatedNumber: number) => {
+                const callback = (generatedNumber) => {
                     return generatedNumber === cardId
                 }
                 if (cardSet.find(callback) === undefined) {
