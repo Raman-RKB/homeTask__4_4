@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 class Level {
     parent: { appendChild: (arg0: any) => void }
     element: any

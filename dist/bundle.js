@@ -1,105 +1,83 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 var __webpack_exports__ = {};
 /*!***********************!*\
-  !*** ./src/script.js ***!
+  !*** ./src/script.ts ***!
   \***********************/
-class Level {
-    constructor(parent) {
-        this.parent = parent
 
+/* eslint-disable prettier/prettier */
+var Level = /** @class */ (function () {
+    function Level(parent) {
+        this.parent = parent;
         // eslint-disable-next-line no-undef
-        this.element = templateEngine(Level.complexityTemplate())
-        parent.appendChild(this.element)
-        this.level = [0]
-
-        this.startButton = this.element.querySelector(
-            '.complexity__start-button'
-        )
-
-        this.complexityСontainer = this.element.querySelector(
-            '.complexity__container'
-        )
-
-        this.onGenerateCardSet.bind(this)
-        this.onStartPlay.bind(this)
-        this.startButton.addEventListener('click', this.onStartPlay.bind(this))
-        this.complexityСontainer.addEventListener(
-            'click',
-            this.onComplexityClick.bind(this)
-        )
+        this.element = templateEngine(Level.complexityTemplate());
+        parent.appendChild(this.element);
+        this.level = [0];
+        this.startButton = this.element.querySelector('.complexity__start-button');
+        this.complexityСontainer = this.element.querySelector('.complexity__container');
+        this.onGenerateCardSet.bind(this);
+        this.onStartPlay.bind(this);
+        this.startButton.addEventListener('click', this.onStartPlay.bind(this));
+        this.complexityСontainer.addEventListener('click', this.onComplexityClick.bind(this));
     }
-
-    onComplexityClick(event) {
-        const target = event.target
-        if (
-            target.classList.contains('level-1') ||
+    Level.complexityTemplate = function () {
+        throw new Error("Method not implemented.");
+    };
+    Level.prototype.onComplexityClick = function (event) {
+        var target = event.target;
+        if (target.classList.contains('level-1') ||
             target.classList.contains('level-2') ||
-            target.classList.contains('level-3')
-        ) {
-            target.classList.add('complexity__container_item-hover')
+            target.classList.contains('level-3')) {
+            target.classList.add('complexity__container_item-hover');
         }
-
         if (target.classList.contains('level-1')) {
-            target.parentElement.nextSibling.firstChild.classList.remove(
-                'complexity__container_item-hover'
-            )
-            this.complexityСontainer.lastChild.classList.remove(
-                'complexity__container_item-hover'
-            )
-            this.level.splice(0, 1, 3)
-        } else if (target.classList.contains('level-2')) {
-            target.parentElement.previousSibling.firstChild.classList.remove(
-                'complexity__container_item-hover'
-            )
-            target.parentElement.nextSibling.firstChild.classList.remove(
-                'complexity__container_item-hover'
-            )
-            this.level.splice(0, 1, 6)
-        } else if (target.classList.contains('level-3')) {
-            target.parentElement.previousSibling.firstChild.classList.remove(
-                'complexity__container_item-hover'
-            )
-            this.complexityСontainer.firstChild.classList.remove(
-                'complexity__container_item-hover'
-            )
-            this.level.splice(0, 1, 9)
+            target.parentElement.nextSibling.firstChild.classList.remove('complexity__container_item-hover');
+            this.complexityСontainer.lastChild.classList.remove('complexity__container_item-hover');
+            this.level.splice(0, 1, 3);
         }
-    }
-
-    onStartPlay() {
+        else if (target.classList.contains('level-2')) {
+            target.parentElement.previousSibling.firstChild.classList.remove('complexity__container_item-hover');
+            target.parentElement.nextSibling.firstChild.classList.remove('complexity__container_item-hover');
+            this.level.splice(0, 1, 6);
+        }
+        else if (target.classList.contains('level-3')) {
+            target.parentElement.previousSibling.firstChild.classList.remove('complexity__container_item-hover');
+            this.complexityСontainer.firstChild.classList.remove('complexity__container_item-hover');
+            this.level.splice(0, 1, 9);
+        }
+    };
+    Level.prototype.onStartPlay = function () {
         if (this.level[0] === 0) {
-            return
+            return;
         }
-        this.element.remove()
-        this.onGenerateCardSet(this.level[0])
-    }
-
-    onGenerateCardSet(lvl) {
-        const cardSet = []
-
-        for (let i = 0; lvl * 2 > cardSet.length; i++) {
-            const cardId = Math.floor(Math.random() * (37 - 1)) + 1
-
+        this.element.remove();
+        this.onGenerateCardSet(this.level[0]);
+    };
+    Level.prototype.onGenerateCardSet = function (lvl) {
+        var cardSet = [];
+        var _loop_1 = function (i) {
+            var cardId = Math.floor(Math.random() * (37 - 1)) + 1;
             if (cardSet.length > 0) {
-                const callback = (generatedNumber) => {
-                    return generatedNumber === cardId
-                }
+                var callback = function (generatedNumber) {
+                    return generatedNumber === cardId;
+                };
                 if (cardSet.find(callback) === undefined) {
-                    cardSet.push(cardId, cardId)
+                    cardSet.push(cardId, cardId);
                 }
-            } else {
-                cardSet.push(cardId, cardId)
             }
+            else {
+                cardSet.push(cardId, cardId);
+            }
+        };
+        for (var i = 0; lvl * 2 > cardSet.length; i++) {
+            _loop_1(i);
         }
         // eslint-disable-next-line no-undef
-        new Game(
-            this.parent,
-            cardSet.sort(() => 0.5 - Math.random())
-        )
-    }
-}
-
-Level.complexityTemplate = () => ({
+        new Game(this.parent, cardSet.sort(function () { return 0.5 - Math.random(); }));
+    };
+    return Level;
+}());
+Level.complexityTemplate = function () { return ({
     tag: 'section',
     cls: 'complexity',
     content: [
@@ -121,7 +99,6 @@ Level.complexityTemplate = () => ({
                         content: '1',
                     },
                 },
-
                 {
                     tag: 'div',
                     cls: ['complexity__container_item-shell', 'level-2'],
@@ -148,7 +125,7 @@ Level.complexityTemplate = () => ({
             content: 'Старт',
         },
     ],
-})
+}); };
 
 /******/ })()
 ;

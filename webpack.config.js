@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
-// eslint-disable-next-line prettier/prettier
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+
 
 module.exports = {
     entry: './src/script.ts',
@@ -41,5 +42,4 @@ module.exports = {
         filename: 'bundle.js',
     },
     plugins: [new MiniCssExtractPlugin(), new HtmlWebpackPlugin()],
-    typeRoots: ["node_modules/@types", "path/to/your/custom/types"]
 }

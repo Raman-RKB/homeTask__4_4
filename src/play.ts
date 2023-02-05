@@ -1,11 +1,14 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-cond-assign */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 //debugger;
 class Game {
     parent: { appendChild: (arg0: any) => void }
     cardSet: number[]
-    setPairCard: never[]
-    setArr: never[]
+    setPairCard: any[]
+    setArr: any[]
     element: any
     timerMinutes: any
     timerSeconds: any
@@ -102,8 +105,9 @@ class Game {
     }
 
     onRestartGameClick() {
-        this.element.remove()
-        new Level(document.querySelector('.body'))
+        let element:any = document.querySelector('.body')
+            this.element.remove()
+            new Level(element);
     }
 
     onCheckMatch() {
@@ -223,3 +227,7 @@ Game.startPlayTemplate = () => ({
         },
     ],
 })
+function timezz(arg0: any, arg1: { date: Date }): any {
+    throw new Error("Function not implemented.")
+}
+

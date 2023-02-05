@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-undef */
 class Popup {
     static PopupTemplate: (resultTag: any, resultText: any, passedTime: any) => { tag: string; cls: string; content: ({ tag: string; cls: string; attrs: { src: string }; content?: undefined } | { tag: string; cls: string; content: any; attrs?: undefined } | { tag: string; cls: string[]; content: string; attrs?: undefined })[] }
@@ -26,8 +28,9 @@ class Popup {
     }
 
     onRestartGameClick() {
+        const element:any = document.querySelector('.body')
         this.parent.replaceChildren()
-        new Level(document.querySelector('.body'))
+        new Level(element)
     }
 
     renderPopup() {
