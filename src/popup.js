@@ -2,10 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-undef */
 class Popup {
-    static PopupTemplate: (resultTag: any, resultText: any, passedTime: any) => { tag: string; cls: string; content: ({ tag: string; cls: string; attrs: { src: string }; content?: undefined } | { tag: string; cls: string; content: any; attrs?: undefined } | { tag: string; cls: string[]; content: string; attrs?: undefined })[] }
-    static PopupBackgroundTemplate: () => { tag: string; cls: string; };
-    [x: string]: any
-    constructor(body: { appendChild: (arg0: any) => void }, result: string, stopwatch: string) {
+    constructor(body, result, stopwatch) {
         this.parent = body
         this.result = result
         this.stopwatch = stopwatch
@@ -28,7 +25,7 @@ class Popup {
     }
 
     onRestartGameClick() {
-        const element:any = document.querySelector('.body')
+        const element = document.querySelector('.body')
         this.parent.replaceChildren()
         new Level(element)
     }
@@ -57,7 +54,7 @@ Popup.PopupBackgroundTemplate = () => ({
     cls: 'result-background',
 })
 
-Popup.PopupTemplate = (resultTag: any, resultText: any, passedTime: any) => ({
+Popup.PopupTemplate = (resultTag, resultText, passedTime) => ({
     tag: 'div',
     cls: `${resultTag}`,
     content: [

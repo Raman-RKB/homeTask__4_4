@@ -5,17 +5,7 @@
 /* eslint-disable no-undef */
 //debugger;
 class Game {
-    parent: { appendChild: (arg0: any) => void }
-    cardSet: number[]
-    setPairCard: any[]
-    setArr: any[]
-    element: any
-    timerMinutes: any
-    timerSeconds: any
-    gameHeaderRestartButton: any
-    cardSetItem: any
-    timer: any
-    constructor(parent: { appendChild: (arg0: any) => void }, cardSet: number[]) {
+    constructor(parent, cardSet) {
         this.parent = parent
 
         this.cardSet = cardSet
@@ -47,12 +37,12 @@ class Game {
             this.onRestartGameClick.bind(this)
         )
     }
-    static startPlayTemplate(): any {
+    static startPlayTemplate() {
         throw new Error("Method not implemented.")
     }
 
     onRenderGameInterface() {
-        this.cardSet.forEach((el: any) => {
+        this.cardSet.forEach((el) => {
             this.cardSetItem = templateEngine(Game.cardSetItemTemplate(el))
             this.element.appendChild(this.cardSetItem)
         })
@@ -100,12 +90,12 @@ class Game {
         }
         setTimeout(this.onHideCards.bind(this), 5000)
     }
-    static cardSetItemTemplate(el: any): any {
+    static cardSetItemTemplate(el) {
         throw new Error("Method not implemented.")
     }
 
     onRestartGameClick() {
-        let element:any = document.querySelector('.body')
+        let element = document.querySelector('.body')
             this.element.remove()
             new Level(element);
     }
@@ -123,7 +113,7 @@ class Game {
         this.setPairCard = []
     }
 
-    onShowCards(event: { target: any }) {
+    onShowCards(event) {
         const target = event.target
         target.style.backgroundImage = null
 
@@ -172,7 +162,7 @@ class Game {
     }
 }
 
-Game.cardSetItemTemplate = (el: any) => ({
+Game.cardSetItemTemplate = (el) => ({
     tag: 'div',
     cls: ['game__container_item', `game__container_item-${el}`],
     attrs: {
@@ -227,7 +217,4 @@ Game.startPlayTemplate = () => ({
         },
     ],
 })
-function timezz(arg0: any, arg1: { date: Date }): any {
-    throw new Error("Function not implemented.")
-}
 

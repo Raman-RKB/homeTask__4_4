@@ -1,11 +1,11 @@
 /* eslint-disable prettier/prettier */
+import * as templateEngine from "./lib/template-engine.js";
+import * as Game from "./play.js";
+import * as Popup from "./popup.js";
+
+
 class Level {
-    parent: { appendChild: (arg0: any) => void }
-    element: any
-    level: number[]
-    startButton: any
-    complexityСontainer: any
-    constructor(parent: { appendChild: (arg0: any) => void }) {
+    constructor(parent) {
         this.parent = parent
 
         // eslint-disable-next-line no-undef
@@ -29,11 +29,11 @@ class Level {
             this.onComplexityClick.bind(this)
         )
     }
-    static complexityTemplate(): any {
+    static complexityTemplate() {
         throw new Error("Method not implemented.")
     }
 
-    onComplexityClick(event: { target: any }) {
+    onComplexityClick(event) {
         const target = event.target
         if (
             target.classList.contains('level-1') ||
@@ -78,14 +78,14 @@ class Level {
         this.onGenerateCardSet(this.level[0])
     }
 
-    onGenerateCardSet(lvl: number) {
+    onGenerateCardSet(lvl) {
         const cardSet = []
 
         for (let i = 0; lvl * 2 > cardSet.length; i++) {
             const cardId = Math.floor(Math.random() * (37 - 1)) + 1
 
             if (cardSet.length > 0) {
-                const callback = (generatedNumber: number) => {
+                const callback = (generatedNumber) => {
                     return generatedNumber === cardId
                 }
                 if (cardSet.find(callback) === undefined) {
