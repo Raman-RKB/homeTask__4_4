@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import * as templateEngine from "./lib/template-engine.js";
-import * as Game from "./play.js";
-import * as Popup from "./popup.js";
+import "./lib/template-engine.js";
+import "./play.js";
+import "./popup.js";
 
 
 class Level {
