@@ -3,8 +3,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
-//debugger;
-class Game {
+
+import Popup from "./popup.js";
+
+export default class Game {
     constructor(parent, cardSet) {
         this.parent = parent
 

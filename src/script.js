@@ -1,8 +1,11 @@
+/* eslint-disable no-class-assign */
 /* eslint-disable prettier/prettier */
-import "./lib/template-engine.js";
-import "./play.js";
-import "./popup.js";
+// eslint-disable-next-line no-debugger
 
+import templateEngine from "./lib/template-engine.js";
+import Game from "./play.js";
+
+import './style.css'
 
 class Level {
     constructor(parent) {
@@ -152,4 +155,8 @@ Level.complexityTemplate = () => ({
             content: 'Старт',
         },
     ],
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+    new Level(document.querySelector('.app'))
 })

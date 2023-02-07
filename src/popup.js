@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-undef */
-class Popup {
+export default class Popup {
     constructor(body, result, stopwatch) {
         this.parent = body
         this.result = result

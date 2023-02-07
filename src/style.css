@@ -5,13 +5,14 @@
     font-family: Statosskyeng;
     src: url('../src/font/statosskyeng-v1.001/Web fonts/stratosskyengweb-regular.woff')
         format('woff');
-    src: local(),
+
+    /* src: local(),
         url('../font/statosskyeng-v1.001/Web fonts/stratosskyengweb-regular.woff2')
             format('woff2'),
         url('../font/statosskyeng-v1.001/Web fonts/stratosskyengweb-regular.woff')
             format('woff'),
         url('../font/statosskyeng-v1.001/Desktop fonts/stratosskyeng-regular.otf')
-            format('otf');
+            format('otf'); */
     font-style: italic;
     font-weight: 400;
 }
