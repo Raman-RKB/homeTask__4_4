@@ -1,13 +1,9 @@
-/* eslint-disable no-class-assign */
-/* eslint-disable prettier/prettier */
-// eslint-disable-next-line no-debugger
-//debugger;
-import templateEngine from "./lib/template-engine.js";
-import Game from "./play.js";
+import templateEngine from './lib/template-engine.js'
+import Game from './play.js'
 
 import './style.css'
 
-class Level {
+export default class Level {
     constructor(parent) {
         this.parent = parent
 
@@ -33,7 +29,7 @@ class Level {
         )
     }
     static complexityTemplate() {
-        throw new Error("Method not implemented.")
+        throw new Error('Method not implemented.')
     }
 
     onComplexityClick(event) {
@@ -158,5 +154,5 @@ Level.complexityTemplate = () => ({
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-    new Level(document.querySelector('.app'))
+    new Level(document.querySelector('.body'))
 })

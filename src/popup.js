@@ -1,8 +1,5 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-undef */
-
-import templateEngine from "./lib/template-engine.js";
+import templateEngine from './lib/template-engine.js'
+import Level from './script.js'
 
 export default class Popup {
     constructor(body, result, stopwatch) {
@@ -30,6 +27,7 @@ export default class Popup {
     onRestartGameClick() {
         const element = document.querySelector('.body')
         this.parent.replaceChildren()
+        // eslint-disable-next-line no-undef
         new Level(element)
     }
 

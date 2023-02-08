@@ -1,11 +1,6 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-cond-assign */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-undef */
-
-import templateEngine from "./lib/template-engine.js";
-import Popup from "./popup.js";
+import templateEngine from './lib/template-engine.js'
+import Popup from './popup.js'
+import timezz from 'timezz'
 
 export default class Game {
     constructor(parent, cardSet) {
@@ -41,7 +36,7 @@ export default class Game {
         )
     }
     static startPlayTemplate() {
-        throw new Error("Method not implemented.")
+        throw new Error('Method not implemented.')
     }
 
     onRenderGameInterface() {
@@ -94,18 +89,19 @@ export default class Game {
         setTimeout(this.onHideCards.bind(this), 5000)
     }
     static cardSetItemTemplate(el) {
-        throw new Error("Method not implemented.")
+        throw new Error('Method not implemented.')
     }
 
     onRestartGameClick() {
         let element = document.querySelector('.body')
-            this.element.remove()
-            new Level(element);
+        this.element.remove()
+        // eslint-disable-next-line no-undef
+        new Level(element)
     }
 
     onCheckMatch() {
         if (this.setPairCard[0].id !== this.setPairCard[1].id) {
-        new Popup(
+            new Popup(
                 this.parent,
                 'lose',
                 `${this.timerMinutes.textContent}.${this.timerSeconds.textContent}`
@@ -144,7 +140,7 @@ export default class Game {
         for (let i = 1; i <= this.cardSet.length; i++) {
             this.element.childNodes[
                 this.element.childNodes.length - i
-            ].style.backgroundImage = 'url(./src/img/face.jpg)'
+            ].style.backgroundImage = `url(./src/img/face.jpg)`
             this.element.addEventListener('click', this.onShowCards)
         }
     }
@@ -153,6 +149,7 @@ export default class Game {
         this.timerMinutes.setAttribute('data-minutes', '')
         this.timerSeconds.setAttribute('data-seconds', '')
 
+        // eslint-disable-next-line no-undef
         this.timer = timezz(document.querySelector('.timer'), {
             date: new Date(),
         })
@@ -220,4 +217,3 @@ Game.startPlayTemplate = () => ({
         },
     ],
 })
-
