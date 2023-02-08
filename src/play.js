@@ -4,6 +4,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 
+import templateEngine from "./lib/template-engine.js";
 import Popup from "./popup.js";
 
 export default class Game {

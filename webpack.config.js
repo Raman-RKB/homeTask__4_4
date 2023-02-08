@@ -40,7 +40,8 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
-  plugins: [new MiniCssExtractPlugin(), 
+  plugins: [
+    new MiniCssExtractPlugin(), 
     new HtmlWebpackPlugin({
     filename: 'index.html',
     template: './index.html',

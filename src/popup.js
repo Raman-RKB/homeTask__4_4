@@ -1,6 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-undef */
+
+import templateEngine from "./lib/template-engine.js";
+
 export default class Popup {
     constructor(body, result, stopwatch) {
         this.parent = body

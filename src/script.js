@@ -1,7 +1,7 @@
 /* eslint-disable no-class-assign */
 /* eslint-disable prettier/prettier */
 // eslint-disable-next-line no-debugger
-debugger;
+//debugger;
 import templateEngine from "./lib/template-engine.js";
 import Game from "./play.js";
 
