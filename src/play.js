@@ -1,6 +1,8 @@
 import templateEngine from './lib/template-engine.js'
 import Popup from './popup.js'
 import timezz from 'timezz'
+import Face from './img/face.jpg'
+console.log(Face)
 
 export default class Game {
     constructor(parent, cardSet) {
@@ -140,7 +142,7 @@ export default class Game {
         for (let i = 1; i <= this.cardSet.length; i++) {
             this.element.childNodes[
                 this.element.childNodes.length - i
-            ].style.backgroundImage = `url(./src/img/face.jpg)`
+            ].style.backgroundImage = `url(./6e3cb4049b2f6d84219a.jpg)`
             this.element.addEventListener('click', this.onShowCards)
         }
     }
