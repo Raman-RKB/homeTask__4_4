@@ -1,6 +1,7 @@
 import templateEngine from './lib/template-engine.js'
 import Popup from './popup.js'
 import timezz from 'timezz'
+//Я 2 строки ниже пока не удаляю т.к. это связано с вопросом преподавателю
 import Face from './img/face.jpg'
 console.log(Face)
 

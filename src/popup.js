@@ -1,5 +1,7 @@
 import templateEngine from './lib/template-engine.js'
 import Level from './script.js'
+import WinIcon from './img/winicon.svg'
+import LoseIcon from './img/loseicon.svg'
 
 export default class Popup {
     constructor(body, result, stopwatch) {
@@ -34,7 +36,7 @@ export default class Popup {
     renderPopup() {
         if (this.result === 'lose') {
             this.element = templateEngine(
-                Popup.PopupTemplate(
+                Popup.PopupLoseTemplate(
                     this.result,
                     'Вы проиграли!',
                     this.stopwatch
@@ -43,7 +45,11 @@ export default class Popup {
             this.parent.appendChild(this.element)
         } else if (this.result === 'win') {
             this.element = templateEngine(
-                Popup.PopupTemplate(this.result, 'Вы выиграли!', this.stopwatch)
+                Popup.PopupWinTemplate(
+                    this.result,
+                    'Вы выиграли!',
+                    this.stopwatch
+                )
             )
             this.parent.appendChild(this.element)
         }
@@ -55,7 +61,7 @@ Popup.PopupBackgroundTemplate = () => ({
     cls: 'result-background',
 })
 
-Popup.PopupTemplate = (resultTag, resultText, passedTime) => ({
+Popup.PopupWinTemplate = (resultTag, resultText, passedTime) => ({
     tag: 'div',
     cls: `${resultTag}`,
     content: [
@@ -63,7 +69,44 @@ Popup.PopupTemplate = (resultTag, resultText, passedTime) => ({
             tag: 'img',
             cls: `${resultTag}__popup_icon`,
             attrs: {
-                src: `./src/img/${resultTag}icon.svg`,
+                src: `/bf0684fdd7c8b9634d54.svg`,
+            },
+        },
+        {
+            tag: 'div',
+            cls: `${resultTag}__popup_title`,
+            content: resultText,
+        },
+        {
+            tag: 'div',
+            cls: `${resultTag}__popup_stopwath-title`,
+            content: 'Затраченное время:',
+        },
+        {
+            tag: 'div',
+            cls: `${resultTag}__popup_stopwath-display`,
+            content: `${passedTime}`,
+        },
+        {
+            tag: 'button',
+            cls: [
+                'popup_play-again-button',
+                `${resultTag}__popup_play-again-button`,
+            ],
+            content: 'Играть снова',
+        },
+    ],
+})
+
+Popup.PopupLoseTemplate = (resultTag, resultText, passedTime) => ({
+    tag: 'div',
+    cls: `${resultTag}`,
+    content: [
+        {
+            tag: 'img',
+            cls: `${resultTag}__popup_icon`,
+            attrs: {
+                src: `/14d22a39e441c520d9e1.svg`,
             },
         },
         {
