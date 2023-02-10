@@ -3,10 +3,20 @@ import Popup from './popup.js'
 import timezz from 'timezz'
 //Я 2 строки ниже пока не удаляю т.к. это связано с вопросом преподавателю
 import Face from './img/face.jpg'
-console.log(Face)
+import Level from './script.js'
 
 export default class Game {
-    constructor(parent, cardSet) {
+    parent: Element
+    cardSet: number[]
+    setPairCard: number[]
+    setArr: number[]
+    element: Element
+    timerMinutes: Element
+    timerSeconds: Element
+    gameHeaderRestartButton: Element
+    cardSetItem: any
+
+    constructor(parent: Element, cardSet: number[]) {
         this.parent = parent
 
         this.cardSet = cardSet
@@ -17,14 +27,19 @@ export default class Game {
         this.element = templateEngine(Game.startPlayTemplate())
         parent.appendChild(this.element)
 
-        this.timerMinutes = this.element.querySelector('.timer__minutes')
-        this.timerSeconds = this.element.querySelector('.timer__seconds')
+        this.timerMinutes = this.element.querySelector(
+            '.timer__minutes'
+        ) as Element
+
+        this.timerSeconds = this.element.querySelector(
+            '.timer__seconds'
+        ) as Element
 
         this.onStartTimer()
 
         this.gameHeaderRestartButton = this.element.querySelector(
             '.game__header_restart-button'
-        )
+        ) as Element
 
         this.onRenderGameInterface.bind(this)
         this.onRenderGameInterface()
@@ -43,7 +58,7 @@ export default class Game {
     }
 
     onRenderGameInterface() {
-        this.cardSet.forEach((el) => {
+        this.cardSet.forEach((el: number) => {
             this.cardSetItem = templateEngine(Game.cardSetItemTemplate(el))
             this.element.appendChild(this.cardSetItem)
         })
@@ -51,59 +66,75 @@ export default class Game {
         if (this.cardSet.length === 6) {
             this.element.classList.add('game-row-adapting-if-6-cards')
             const gameHeader = this.element.querySelector('.game__header')
-            gameHeader.classList.add('game__header-span-adapting-if-6-cards')
+            if (gameHeader !== null) {
+                gameHeader.classList.add(
+                    'game__header-span-adapting-if-6-cards'
+                )
+            }
         }
 
         if (this.cardSet.length === 12) {
-            this.element.childNodes[
+            const element = this.element.childNodes[
                 this.element.childNodes.length - 3
-            ].classList.add('second-row-centering-if-12-cards')
+            ] as Element
+
+            element.classList.add('second-row-centering-if-12-cards')
 
             const gameHeaderMinPointer = this.element.querySelector(
                 '.game__header_min-pointer'
             )
-            gameHeaderMinPointer.classList.add(
-                'game__header_min-display-adapting-if-12-cards'
-            )
+            if (gameHeaderMinPointer !== null) {
+                gameHeaderMinPointer.classList.add(
+                    'game__header_min-display-adapting-if-12-cards'
+                )
+            }
 
             const gameHeaderSinPointer = this.element.querySelector(
                 '.game__header_sec-pointer'
             )
-            gameHeaderSinPointer.classList.add(
-                'game__header_sec-display-adapting-if-12-cards'
-            )
+            if (gameHeaderSinPointer !== null) {
+                gameHeaderSinPointer.classList.add(
+                    'game__header_sec-display-adapting-if-12-cards'
+                )
+            }
         }
 
         if (this.cardSet.length === 18) {
             const gameHeaderMinPointer = this.element.querySelector(
                 '.game__header_min-pointer'
             )
-            gameHeaderMinPointer.classList.add(
-                'game__header_min-display-adapting-if-12-cards'
-            )
+
+            if (gameHeaderMinPointer !== null) {
+                gameHeaderMinPointer.classList.add(
+                    'game__header_min-display-adapting-if-12-cards'
+                )
+            }
 
             const gameHeaderSinPointer = this.element.querySelector(
                 '.game__header_sec-pointer'
             )
-            gameHeaderSinPointer.classList.add(
-                'game__header_sec-display-adapting-if-12-cards'
-            )
+
+            if (gameHeaderSinPointer !== null) {
+                gameHeaderSinPointer.classList.add(
+                    'game__header_sec-display-adapting-if-12-cards'
+                )
+            }
         }
         setTimeout(this.onHideCards.bind(this), 5000)
     }
-    static cardSetItemTemplate(el) {
+    static cardSetItemTemplate(el: number) {
         throw new Error('Method not implemented.')
     }
 
     onRestartGameClick() {
-        let element = document.querySelector('.body')
+        const element = document.querySelector('.body')
         this.element.remove()
         // eslint-disable-next-line no-undef
         new Level(element)
     }
 
     onCheckMatch() {
-        if (this.setPairCard[0].id !== this.setPairCard[1].id) {
+        if (this.setPairCard[0] !== this.setPairCard[1]) {
             new Popup(
                 this.parent,
                 'lose',
@@ -115,9 +146,9 @@ export default class Game {
         this.setPairCard = []
     }
 
-    onShowCards(event) {
-        const target = event.target
-        target.style.backgroundImage = null
+    onShowCards(event: Event) {
+        const target = event.target as HTMLElement
+        target.style.backgroundImage = ''
 
         if (this.setPairCard.length === 0) {
             this.setArr.push(target)

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // eslint-disable-next-line no-unused-vars
 
-export default function templateEngine(block) {
+export default function templateEngine(block: any) {
     if (block === undefined || block === null || block === false) {
         return document.createTextNode('')
     }

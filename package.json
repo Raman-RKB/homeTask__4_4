@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "format": "prettier --write ./src/",
-        "lint:js": "eslint ./src/**/*.js",
+        "lint:js": "eslint ./src/**/*.ts",
         "lint:css": "stylelint ./src/**/*.css",
         "prepare": "husky install",
         "lint": "npm run lint:js && npm run lint:css",

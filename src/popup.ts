@@ -4,6 +4,12 @@ import WinIcon from './img/winicon.svg'
 import LoseIcon from './img/loseicon.svg'
 
 export default class Popup {
+    parent: Element
+    result: string
+    stopwatch: string
+    popupBackground: Element
+    popupPlayAgainButton: Element
+    element: Element
     constructor(body, result, stopwatch) {
         this.parent = body
         this.result = result
@@ -24,6 +30,9 @@ export default class Popup {
             'click',
             this.onRestartGameClick.bind(this)
         )
+    }
+    static PopupBackgroundTemplate(): any {
+        throw new Error('Method not implemented.')
     }
 
     onRestartGameClick() {
@@ -53,6 +62,12 @@ export default class Popup {
             )
             this.parent.appendChild(this.element)
         }
+    }
+    static PopupLoseTemplate(result: any, arg1: string, stopwatch: any): any {
+        throw new Error('Method not implemented.')
+    }
+    static PopupWinTemplate(result: any, arg1: string, stopwatch: any): any {
+        throw new Error('Method not implemented.')
     }
 }
 
