@@ -15,8 +15,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        test: [/\.css$/, /\.ts$/],
+        use: [MiniCssExtractPlugin.loader, "css-loader", 'ts-loader']
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,

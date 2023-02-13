@@ -1,16 +1,14 @@
 import templateEngine from './lib/template-engine.js'
 import Level from './script.js'
-import WinIcon from './img/winicon.svg'
-import LoseIcon from './img/loseicon.svg'
 
 export default class Popup {
     parent: Element
     result: string
     stopwatch: string
     popupBackground: Element
-    popupPlayAgainButton: Element
-    element: Element
-    constructor(body, result, stopwatch) {
+    popupPlayAgainButton: Element | undefined
+    element: Element | undefined
+    constructor(body: Element, result: string, stopwatch: string) {
         this.parent = body
         this.result = result
         this.stopwatch = stopwatch
@@ -21,15 +19,22 @@ export default class Popup {
 
         this.renderPopup.bind(this)
         this.renderPopup()
+        if (this.element) {
+            const playAgainButton = this.element.querySelector(
+                '.popup_play-again-button'
+            )
+            if (playAgainButton) {
+                this.popupPlayAgainButton = playAgainButton
+            }
+        }
 
-        this.popupPlayAgainButton = this.element.querySelector(
-            '.popup_play-again-button'
-        )
         this.onRestartGameClick.bind(this)
-        this.popupPlayAgainButton.addEventListener(
-            'click',
-            this.onRestartGameClick.bind(this)
-        )
+        if (this.popupPlayAgainButton) {
+            this.popupPlayAgainButton.addEventListener(
+                'click',
+                this.onRestartGameClick.bind(this)
+            )
+        }
     }
     static PopupBackgroundTemplate(): any {
         throw new Error('Method not implemented.')
@@ -51,7 +56,9 @@ export default class Popup {
                     this.stopwatch
                 )
             )
-            this.parent.appendChild(this.element)
+            if (this.element) {
+                this.parent.appendChild(this.element)
+            }
         } else if (this.result === 'win') {
             this.element = templateEngine(
                 Popup.PopupWinTemplate(
@@ -60,9 +67,12 @@ export default class Popup {
                     this.stopwatch
                 )
             )
-            this.parent.appendChild(this.element)
+            if (this.element) {
+                this.parent.appendChild(this.element)
+            }
         }
     }
+
     static PopupLoseTemplate(result: any, arg1: string, stopwatch: any): any {
         throw new Error('Method not implemented.')
     }

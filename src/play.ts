@@ -1,20 +1,20 @@
 import templateEngine from './lib/template-engine.js'
 import Popup from './popup.js'
-import timezz from 'timezz'
-//Я 2 строки ниже пока не удаляю т.к. это связано с вопросом преподавателю
+
 import Face from './img/face.jpg'
 import Level from './script.js'
 
 export default class Game {
     parent: Element
     cardSet: number[]
-    setPairCard: number[]
-    setArr: number[]
+    setPairCard: Element[]
+    setArr: Element[]
     element: Element
     timerMinutes: Element
     timerSeconds: Element
     gameHeaderRestartButton: Element
     cardSetItem: any
+    timer: any
 
     constructor(parent: Element, cardSet: number[]) {
         this.parent = parent
@@ -147,34 +147,37 @@ export default class Game {
     }
 
     onShowCards(event: Event) {
-        const target = event.target as HTMLElement
-        target.style.backgroundImage = ''
+        if (event.target instanceof Element) {
+            const target = event.target as HTMLElement
+            target.style.backgroundImage = ''
 
-        if (this.setPairCard.length === 0) {
-            this.setArr.push(target)
-            this.setPairCard.push(target)
-        } else if (
-            this.setPairCard.length > 0 &&
-            this.setArr.length < this.cardSet.length - 1
-        ) {
-            this.setArr.push(target)
-            this.setPairCard.push(target)
-            this.onCheckMatch()
-        } else {
-            new Popup(
-                this.parent,
-                'win',
-                `${this.timerMinutes.textContent}.${this.timerSeconds.textContent}`
-            )
-            this.onPauseTimer()
+            if (this.setPairCard.length === 0) {
+                this.setArr.push(target)
+                this.setPairCard.push(target)
+            } else if (
+                this.setPairCard.length > 0 &&
+                this.setArr.length < this.cardSet.length - 1
+            ) {
+                this.setArr.push(target)
+                this.setPairCard.push(target)
+                this.onCheckMatch()
+            } else {
+                new Popup(
+                    this.parent,
+                    'win',
+                    `${this.timerMinutes.textContent}.${this.timerSeconds.textContent}`
+                )
+                this.onPauseTimer()
+            }
         }
     }
 
     onHideCards() {
         for (let i = 1; i <= this.cardSet.length; i++) {
-            this.element.childNodes[
+            const element = this.element.childNodes[
                 this.element.childNodes.length - i
-            ].style.backgroundImage = `url(./6e3cb4049b2f6d84219a.jpg)`
+            ] as HTMLElement
+            element.style.backgroundImage = `${Face}`
             this.element.addEventListener('click', this.onShowCards)
         }
     }
@@ -183,12 +186,15 @@ export default class Game {
         this.timerMinutes.setAttribute('data-minutes', '')
         this.timerSeconds.setAttribute('data-seconds', '')
 
-        // eslint-disable-next-line no-undef
-        this.timer = timezz(document.querySelector('.timer'), {
-            date: new Date(),
-        })
+        const timerElement = document.querySelector('.timer')
+        if (timerElement) {
+            // eslint-disable-next-line no-undef
+            this.timer = timezz(timerElement, {
+                date: new Date(),
+            })
 
-        this.timer.stopOnZero = false
+            this.timer.stopOnZero = false
+        }
     }
 
     onPauseTimer() {
@@ -251,3 +257,6 @@ Game.startPlayTemplate = () => ({
         },
     ],
 })
+function timezz(timerElement: Element, arg1: { date: Date }): any {
+    throw new Error('Function not implemented.')
+}
