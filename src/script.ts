@@ -1,11 +1,19 @@
-/* eslint-disable prettier/prettier */
-class Level {
-    parent: { appendChild: (arg0: any) => void }
-    element: any
+import templateEngine from './lib/template-engine.js'
+import Game from './play.js'
+
+import './style.css'
+
+export default class Level {
+    parent: Element
+    element: Element
     level: number[]
-    startButton: any
-    complexityСontainer: any
-    constructor(parent: { appendChild: (arg0: any) => void }) {
+    startButton: Element
+    complexityСontainer: Element
+
+    constructor(parent: Element | null) {
+        if (parent === null) {
+            throw new Error('The parent element is null.')
+        }
         this.parent = parent
 
         // eslint-disable-next-line no-undef
@@ -13,28 +21,39 @@ class Level {
         parent.appendChild(this.element)
         this.level = [0]
 
-        this.startButton = this.element.querySelector(
+        const startButton = this.element.querySelector(
             '.complexity__start-button'
         )
+        if (startButton === null) {
+            throw new Error('The start button is null.')
+        }
+        this.startButton = startButton
 
-        this.complexityСontainer = this.element.querySelector(
+        const complexityСontainer = this.element.querySelector(
             '.complexity__container'
         )
+
+        if (complexityСontainer === null) {
+            throw new Error('The complexity container is null.')
+        }
+
+        this.complexityСontainer = complexityСontainer
 
         this.onGenerateCardSet.bind(this)
         this.onStartPlay.bind(this)
         this.startButton.addEventListener('click', this.onStartPlay.bind(this))
+
         this.complexityСontainer.addEventListener(
             'click',
             this.onComplexityClick.bind(this)
         )
     }
-    static complexityTemplate(): any {
-        throw new Error("Method not implemented.")
+    static complexityTemplate() {
+        throw new Error('Method not implemented.')
     }
 
-    onComplexityClick(event: { target: any }) {
-        const target = event.target
+    onComplexityClick(event: Event) {
+        const target = event.target as Element
         if (
             target.classList.contains('level-1') ||
             target.classList.contains('level-2') ||
@@ -42,30 +61,54 @@ class Level {
         ) {
             target.classList.add('complexity__container_item-hover')
         }
+        if (
+            target !== null &&
+            target.parentElement !== null &&
+            target.parentElement.nextSibling !== null
+        ) {
+            const firstChild = target.parentElement.nextSibling
+                .firstChild as Element
+            if (target.classList.contains('level-1')) {
+                firstChild.classList.remove('complexity__container_item-hover')
+            }
 
-        if (target.classList.contains('level-1')) {
-            target.parentElement.nextSibling.firstChild.classList.remove(
-                'complexity__container_item-hover'
-            )
-            this.complexityСontainer.lastChild.classList.remove(
-                'complexity__container_item-hover'
-            )
+            const lastChild = this.complexityСontainer.lastChild
+            if (
+                this.complexityСontainer.lastChild &&
+                lastChild instanceof Element
+            ) {
+                lastChild.classList.remove('complexity__container_item-hover')
+            }
+
             this.level.splice(0, 1, 3)
         } else if (target.classList.contains('level-2')) {
-            target.parentElement.previousSibling.firstChild.classList.remove(
-                'complexity__container_item-hover'
-            )
-            target.parentElement.nextSibling.firstChild.classList.remove(
-                'complexity__container_item-hover'
-            )
+            if (
+                target !== null &&
+                target.parentElement !== null &&
+                target.parentElement.nextSibling !== null
+            ) {
+                const firstChild = target.parentElement.nextSibling
+                    .firstChild as Element
+                firstChild.classList.remove('complexity__container_item-hover')
+            }
             this.level.splice(0, 1, 6)
         } else if (target.classList.contains('level-3')) {
-            target.parentElement.previousSibling.firstChild.classList.remove(
-                'complexity__container_item-hover'
-            )
-            this.complexityСontainer.firstChild.classList.remove(
-                'complexity__container_item-hover'
-            )
+            if (
+                target !== null &&
+                target.parentElement !== null &&
+                target.parentElement.previousSibling !== null
+            ) {
+                const firstChild = target.parentElement.previousSibling
+                    .firstChild as Element
+                firstChild.classList.remove('complexity__container_item-hover')
+            }
+            const lastChild = this.complexityСontainer.lastChild
+            if (
+                this.complexityСontainer.lastChild &&
+                lastChild instanceof Element
+            ) {
+                lastChild.classList.remove('complexity__container_item-hover')
+            }
             this.level.splice(0, 1, 9)
         }
     }
@@ -152,4 +195,8 @@ Level.complexityTemplate = () => ({
             content: 'Старт',
         },
     ],
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+    new Level(document.querySelector('.body'))
 })

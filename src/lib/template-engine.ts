@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // eslint-disable-next-line no-unused-vars
-function templateEngine(block) {
+
+export default function templateEngine(block: any) {
     if (block === undefined || block === null || block === false) {
         return document.createTextNode('')
     }

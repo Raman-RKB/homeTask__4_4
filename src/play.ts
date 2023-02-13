@@ -1,21 +1,22 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-cond-assign */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-undef */
-//debugger;
-class Game {
-    parent: { appendChild: (arg0: any) => void }
+import templateEngine from './lib/template-engine.js'
+import Popup from './popup.js'
+
+import Face from './img/face.jpg'
+import Level from './script.js'
+
+export default class Game {
+    parent: Element
     cardSet: number[]
-    setPairCard: any[]
-    setArr: any[]
-    element: any
-    timerMinutes: any
-    timerSeconds: any
-    gameHeaderRestartButton: any
+    setPairCard: Element[]
+    setArr: Element[]
+    element: Element
+    timerMinutes: Element
+    timerSeconds: Element
+    gameHeaderRestartButton: Element
     cardSetItem: any
     timer: any
-    constructor(parent: { appendChild: (arg0: any) => void }, cardSet: number[]) {
+
+    constructor(parent: Element, cardSet: number[]) {
         this.parent = parent
 
         this.cardSet = cardSet
@@ -26,14 +27,19 @@ class Game {
         this.element = templateEngine(Game.startPlayTemplate())
         parent.appendChild(this.element)
 
-        this.timerMinutes = this.element.querySelector('.timer__minutes')
-        this.timerSeconds = this.element.querySelector('.timer__seconds')
+        this.timerMinutes = this.element.querySelector(
+            '.timer__minutes'
+        ) as Element
+
+        this.timerSeconds = this.element.querySelector(
+            '.timer__seconds'
+        ) as Element
 
         this.onStartTimer()
 
         this.gameHeaderRestartButton = this.element.querySelector(
             '.game__header_restart-button'
-        )
+        ) as Element
 
         this.onRenderGameInterface.bind(this)
         this.onRenderGameInterface()
@@ -47,12 +53,12 @@ class Game {
             this.onRestartGameClick.bind(this)
         )
     }
-    static startPlayTemplate(): any {
-        throw new Error("Method not implemented.")
+    static startPlayTemplate() {
+        throw new Error('Method not implemented.')
     }
 
     onRenderGameInterface() {
-        this.cardSet.forEach((el: any) => {
+        this.cardSet.forEach((el: number) => {
             this.cardSetItem = templateEngine(Game.cardSetItemTemplate(el))
             this.element.appendChild(this.cardSetItem)
         })
@@ -60,59 +66,76 @@ class Game {
         if (this.cardSet.length === 6) {
             this.element.classList.add('game-row-adapting-if-6-cards')
             const gameHeader = this.element.querySelector('.game__header')
-            gameHeader.classList.add('game__header-span-adapting-if-6-cards')
+            if (gameHeader !== null) {
+                gameHeader.classList.add(
+                    'game__header-span-adapting-if-6-cards'
+                )
+            }
         }
 
         if (this.cardSet.length === 12) {
-            this.element.childNodes[
+            const element = this.element.childNodes[
                 this.element.childNodes.length - 3
-            ].classList.add('second-row-centering-if-12-cards')
+            ] as Element
+
+            element.classList.add('second-row-centering-if-12-cards')
 
             const gameHeaderMinPointer = this.element.querySelector(
                 '.game__header_min-pointer'
             )
-            gameHeaderMinPointer.classList.add(
-                'game__header_min-display-adapting-if-12-cards'
-            )
+            if (gameHeaderMinPointer !== null) {
+                gameHeaderMinPointer.classList.add(
+                    'game__header_min-display-adapting-if-12-cards'
+                )
+            }
 
             const gameHeaderSinPointer = this.element.querySelector(
                 '.game__header_sec-pointer'
             )
-            gameHeaderSinPointer.classList.add(
-                'game__header_sec-display-adapting-if-12-cards'
-            )
+            if (gameHeaderSinPointer !== null) {
+                gameHeaderSinPointer.classList.add(
+                    'game__header_sec-display-adapting-if-12-cards'
+                )
+            }
         }
 
         if (this.cardSet.length === 18) {
             const gameHeaderMinPointer = this.element.querySelector(
                 '.game__header_min-pointer'
             )
-            gameHeaderMinPointer.classList.add(
-                'game__header_min-display-adapting-if-12-cards'
-            )
+
+            if (gameHeaderMinPointer !== null) {
+                gameHeaderMinPointer.classList.add(
+                    'game__header_min-display-adapting-if-12-cards'
+                )
+            }
 
             const gameHeaderSinPointer = this.element.querySelector(
                 '.game__header_sec-pointer'
             )
-            gameHeaderSinPointer.classList.add(
-                'game__header_sec-display-adapting-if-12-cards'
-            )
+
+            if (gameHeaderSinPointer !== null) {
+                gameHeaderSinPointer.classList.add(
+                    'game__header_sec-display-adapting-if-12-cards'
+                )
+            }
         }
         setTimeout(this.onHideCards.bind(this), 5000)
     }
-    static cardSetItemTemplate(el: any): any {
-        throw new Error("Method not implemented.")
+    static cardSetItemTemplate(el: number) {
+        throw new Error('Method not implemented.')
     }
 
     onRestartGameClick() {
-        let element:any = document.querySelector('.body')
-            this.element.remove()
-            new Level(element);
+        const element = document.querySelector('.body')
+        this.element.remove()
+        // eslint-disable-next-line no-undef
+        new Level(element)
     }
 
     onCheckMatch() {
-        if (this.setPairCard[0].id !== this.setPairCard[1].id) {
-        new Popup(
+        if (this.setPairCard[0] !== this.setPairCard[1]) {
+            new Popup(
                 this.parent,
                 'lose',
                 `${this.timerMinutes.textContent}.${this.timerSeconds.textContent}`
@@ -123,35 +146,38 @@ class Game {
         this.setPairCard = []
     }
 
-    onShowCards(event: { target: any }) {
-        const target = event.target
-        target.style.backgroundImage = null
+    onShowCards(event: Event) {
+        if (event.target instanceof Element) {
+            const target = event.target as HTMLElement
+            target.style.backgroundImage = ''
 
-        if (this.setPairCard.length === 0) {
-            this.setArr.push(target)
-            this.setPairCard.push(target)
-        } else if (
-            this.setPairCard.length > 0 &&
-            this.setArr.length < this.cardSet.length - 1
-        ) {
-            this.setArr.push(target)
-            this.setPairCard.push(target)
-            this.onCheckMatch()
-        } else {
-            new Popup(
-                this.parent,
-                'win',
-                `${this.timerMinutes.textContent}.${this.timerSeconds.textContent}`
-            )
-            this.onPauseTimer()
+            if (this.setPairCard.length === 0) {
+                this.setArr.push(target)
+                this.setPairCard.push(target)
+            } else if (
+                this.setPairCard.length > 0 &&
+                this.setArr.length < this.cardSet.length - 1
+            ) {
+                this.setArr.push(target)
+                this.setPairCard.push(target)
+                this.onCheckMatch()
+            } else {
+                new Popup(
+                    this.parent,
+                    'win',
+                    `${this.timerMinutes.textContent}.${this.timerSeconds.textContent}`
+                )
+                this.onPauseTimer()
+            }
         }
     }
 
     onHideCards() {
         for (let i = 1; i <= this.cardSet.length; i++) {
-            this.element.childNodes[
+            const element = this.element.childNodes[
                 this.element.childNodes.length - i
-            ].style.backgroundImage = 'url(./src/img/face.jpg)'
+            ] as HTMLElement
+            element.style.backgroundImage = `${Face}`
             this.element.addEventListener('click', this.onShowCards)
         }
     }
@@ -160,11 +186,15 @@ class Game {
         this.timerMinutes.setAttribute('data-minutes', '')
         this.timerSeconds.setAttribute('data-seconds', '')
 
-        this.timer = timezz(document.querySelector('.timer'), {
-            date: new Date(),
-        })
+        const timerElement = document.querySelector('.timer')
+        if (timerElement) {
+            // eslint-disable-next-line no-undef
+            this.timer = timezz(timerElement, {
+                date: new Date(),
+            })
 
-        this.timer.stopOnZero = false
+            this.timer.stopOnZero = false
+        }
     }
 
     onPauseTimer() {
@@ -172,7 +202,7 @@ class Game {
     }
 }
 
-Game.cardSetItemTemplate = (el: any) => ({
+Game.cardSetItemTemplate = (el) => ({
     tag: 'div',
     cls: ['game__container_item', `game__container_item-${el}`],
     attrs: {
@@ -227,7 +257,6 @@ Game.startPlayTemplate = () => ({
         },
     ],
 })
-function timezz(arg0: any, arg1: { date: Date }): any {
-    throw new Error("Function not implemented.")
+function timezz(timerElement: Element, arg1: { date: Date }): any {
+    throw new Error('Function not implemented.')
 }
-
